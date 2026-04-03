@@ -4,11 +4,13 @@ from inference import main
 def run_app():
     return main()
 
-iface = gr.Interface(
-    fn=run_app,
-    inputs=[],
-    outputs="text",
-    title="Railway Environment"
-)
+with gr.Blocks() as demo:
+    gr.Markdown("# 🚆 Railway Environment")
 
-iface.launch()
+    btn = gr.Button("Run")
+
+    output = gr.Textbox()
+
+    btn.click(fn=run_app, inputs=[], outputs=output)
+
+demo.launch(server_name="0.0.0.0", server_port=7860)
