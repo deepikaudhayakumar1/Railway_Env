@@ -7,10 +7,8 @@ def run_app():
 with gr.Blocks() as demo:
     gr.Markdown("# 🚆 Railway Environment")
 
-    btn = gr.Button("Run")
+    output = gr.Textbox(label="Output")
 
-    output = gr.Textbox()
-
-    btn.click(fn=run_app, inputs=[], outputs=output)
+    demo.load(fn=run_app, inputs=[], outputs=output)
 
 demo.launch(server_name="0.0.0.0", server_port=7860)
