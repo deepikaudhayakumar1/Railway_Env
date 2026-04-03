@@ -1,14 +1,18 @@
-import gradio as gr
+from fastapi import FastAPI
 from inference import main
 
-def run_app():
-    return main()
+app = FastAPI()
 
-with gr.Blocks() as demo:
-    gr.Markdown("# 🚆 Railway Environment")
+@app.get("/")
+def home():
+    return {"message": "Railway Env Running"}
 
-    output = gr.Textbox(label="Output")
+@app.post("/reset")
+def reset():
+    result = main()
+    return {"result": result}
 
-    demo.load(fn=run_app, inputs=[], outputs=output)
-
-demo.launch(server_name="0.0.0.0", server_port=7860)
+@app.post("/step")
+def step():
+    result = main()
+    return {"result": result}
