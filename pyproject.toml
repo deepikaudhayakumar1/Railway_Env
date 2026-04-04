@@ -4,5 +4,9 @@ version = "0.1.0"
 description = "Railway environment for OpenEnv"
 dependencies = [
     "fastapi",
-    "uvicorn"
+    "uvicorn",
+    "openenv>=0.1.13"
 ]
+
+[project.scripts]
+start = "app:app"
