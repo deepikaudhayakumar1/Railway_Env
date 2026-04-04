@@ -1,7 +1,11 @@
 from fastapi import FastAPI
-from inference import main
+from inference import main as env_main
 
 app = FastAPI()
+
+# REQUIRED by OpenEnv
+def main():
+    return app
 
 # Root endpoint
 @app.get("/")
@@ -12,7 +16,7 @@ def home():
 @app.post("/reset")
 def reset():
     try:
-        observation = main()
+        observation = env_main()
 
         return {
             "observation": observation,
@@ -20,7 +24,6 @@ def reset():
         }
 
     except Exception as e:
-        # ✅ Always return correct format
         return {
             "observation": [],
             "info": {"error": str(e)}
@@ -30,7 +33,7 @@ def reset():
 @app.post("/step")
 def step():
     try:
-        observation = main()
+        observation = env_main()
 
         return {
             "observation": observation,
@@ -40,7 +43,6 @@ def step():
         }
 
     except Exception as e:
-        # ✅ Always return correct format
         return {
             "observation": [],
             "reward": 0,
