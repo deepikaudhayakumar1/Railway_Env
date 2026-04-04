@@ -1,0 +1,8 @@
+[project]
+name = "railway-env"
+version = "0.1.0"
+description = "Railway environment for OpenEnv"
+dependencies = [
+    "fastapi",
+    "uvicorn"
+]
