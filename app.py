@@ -3,16 +3,41 @@ from inference import main
 
 app = FastAPI()
 
+# Root endpoint (optional)
 @app.get("/")
 def home():
-    return {"message": "Railway Env Running"}
+    return {"message": "App is running"}
 
+# RESET endpoint (IMPORTANT)
 @app.post("/reset")
 def reset():
-    result = main()
-    return {"result": result}
+    try:
+        observation = main()   # your environment reset logic
 
+        return {
+            "observation": observation,
+            "info": {}
+        }
+
+    except Exception as e:
+        return {
+            "error": str(e)
+        }
+
+# STEP endpoint (IMPORTANT)
 @app.post("/step")
 def step():
-    result = main()
-    return {"result": result}
+    try:
+        observation = main()   # your step logic (update if needed)
+
+        return {
+            "observation": observation,
+            "reward": 0,
+            "done": False,
+            "info": {}
+        }
+
+    except Exception as e:
+        return {
+            "error": str(e)
+        }
