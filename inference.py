@@ -17,12 +17,11 @@ def main():
     score_hard = hard.run_task(env)
     grade_hard = grader_hard.grade(score_hard)
 
-    output = f"""
-    [START]
-    [STEP] EASY Score: {round(grade_easy, 2)}
-    [STEP] MEDIUM Score: {round(grade_medium, 2)}
-    [STEP] HARD Score: {round(grade_hard, 2)}
-    [END]
-    """
-
-    return output
+    # ✅ RETURN AS LIST (IMPORTANT FOR OPENENV)
+    return [
+        "[START]",
+        f"EASY Score: {round(grade_easy, 2)}",
+        f"MEDIUM Score: {round(grade_medium, 2)}",
+        f"HARD Score: {round(grade_hard, 2)}",
+        "[END]"
+    ]

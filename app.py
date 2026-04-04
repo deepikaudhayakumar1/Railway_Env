@@ -3,16 +3,16 @@ from inference import main
 
 app = FastAPI()
 
-# Root endpoint (optional)
+# Root endpoint
 @app.get("/")
 def home():
     return {"message": "App is running"}
 
-# RESET endpoint (IMPORTANT)
+# RESET endpoint
 @app.post("/reset")
 def reset():
     try:
-        observation = main()   # your environment reset logic
+        observation = main()
 
         return {
             "observation": observation,
@@ -20,15 +20,17 @@ def reset():
         }
 
     except Exception as e:
+        # ✅ Always return correct format
         return {
-            "error": str(e)
+            "observation": [],
+            "info": {"error": str(e)}
         }
 
-# STEP endpoint (IMPORTANT)
+# STEP endpoint
 @app.post("/step")
 def step():
     try:
-        observation = main()   # your step logic (update if needed)
+        observation = main()
 
         return {
             "observation": observation,
@@ -38,6 +40,10 @@ def step():
         }
 
     except Exception as e:
+        # ✅ Always return correct format
         return {
-            "error": str(e)
+            "observation": [],
+            "reward": 0,
+            "done": True,
+            "info": {"error": str(e)}
         }
