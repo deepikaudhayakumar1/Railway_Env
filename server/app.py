@@ -17,9 +17,6 @@ def step():
     result = inference_main()
     return {"result": result}
 
-# 👇 ADD THIS
+# IMPORTANT
 def main():
     return app
-# 👇 THIS IS VERY IMPORTANT
-if __name__ == "__main__":
-    main()
