@@ -1,51 +1,27 @@
 from fastapi import FastAPI
-from inference import main as env_main
+from inference import main as inference_main
 
 app = FastAPI()
 
-# REQUIRED by OpenEnv
-def main():
-    return app
-
-# Root endpoint
 @app.get("/")
 def home():
-    return {"message": "App is running"}
+    return {"message": "Railway Env Running"}
 
-# RESET endpoint
 @app.post("/reset")
 def reset():
-    try:
-        observation = env_main()
+    result = inference_main()
+    return {"result": result}
 
-        return {
-            "observation": observation,
-            "info": {}
-        }
-
-    except Exception as e:
-        return {
-            "observation": [],
-            "info": {"error": str(e)}
-        }
-
-# STEP endpoint
 @app.post("/step")
 def step():
-    try:
-        observation = env_main()
+    result = inference_main()
+    return {"result": result}
 
-        return {
-            "observation": observation,
-            "reward": 0,
-            "done": False,
-            "info": {}
-        }
+# 👇 ADD THIS
+def main():
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=7860)
 
-    except Exception as e:
-        return {
-            "observation": [],
-            "reward": 0,
-            "done": True,
-            "info": {"error": str(e)}
-        }
+# 👇 THIS IS VERY IMPORTANT
+if __name__ == "__main__":
+    main()
