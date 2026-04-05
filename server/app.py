@@ -19,9 +19,7 @@ def step():
 
 # 👇 ADD THIS
 def main():
-    import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=7860)
-
+    return app
 # 👇 THIS IS VERY IMPORTANT
 if __name__ == "__main__":
     main()
