@@ -3,6 +3,9 @@ description: Railway crack detection RL environment
 
 entry_point: env.environment:RailwayEnv
 
+server:
+  entry_point: server.app:app
+
 tasks:
   - easy
   - medium
