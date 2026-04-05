@@ -9,14 +9,19 @@ def home():
 
 @app.post("/reset")
 def reset():
-    result = inference_main()
-    return {"result": result}
+    return {
+        "observation": "reset done",
+        "reward": 0,
+        "done": False
+    }
 
 @app.post("/step")
 def step():
-    result = inference_main()
-    return {"result": result}
-
+    return {
+        "observation": "step done",
+        "reward": 1,
+        "done": False
+    }
 # IMPORTANT
 def main():
     return app
